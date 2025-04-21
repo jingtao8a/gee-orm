@@ -8,7 +8,7 @@ import (
 
 type sqlite3 struct{}
 
-func init() {
+func init() { // dialect包被import时，该函数执行
 	RegisterDialect("sqlite3", &sqlite3{})
 }
 
