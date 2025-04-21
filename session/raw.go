@@ -2,18 +2,25 @@ package session
 
 import (
 	"database/sql"
+	"gee-orm/dialect"
 	"gee-orm/log"
+	"gee-orm/schema"
 	"strings"
 )
 
 type Session struct {
-	db      *sql.DB
-	sql     strings.Builder
-	sqlVars []interface{}
+	db       *sql.DB
+	dialect  dialect.Dialect
+	refTable *schema.Schema
+	sql      strings.Builder
+	sqlVars  []interface{}
 }
 
-func NewSession(db *sql.DB) *Session {
-	return &Session{db: db}
+func NewSession(db *sql.DB, dialect dialect.Dialect) *Session {
+	return &Session{
+		db:      db,
+		dialect: dialect,
+	}
 }
 
 func (s *Session) Clear() {
