@@ -13,6 +13,7 @@ func RegisterDialect(name string, dialect Dialect) {
 	dialectsMap[name] = dialect
 }
 
-func GetDialect(name string) Dialect {
-	return dialectsMap[name]
+func GetDialect(name string) (Dialect, bool) {
+	dialect, ok := dialectsMap[name]
+	return dialect, ok
 }
