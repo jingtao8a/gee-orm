@@ -31,7 +31,9 @@ const (
 func SetLevel(level int) {
 	mu.Lock()
 	defer mu.Unlock()
-
+	for _, logger := range loggers {
+		logger.SetOutput(os.Stdout)
+	}
 	if InfoLevel < level {
 		infoLog.SetOutput(ioutil.Discard)
 	}
