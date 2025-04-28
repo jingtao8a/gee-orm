@@ -33,7 +33,7 @@ func Parse(dest interface{}, d dialect.Dialect) *Schema {
 	}
 	for i := 0; i < modelType.NumField(); i++ {
 		p := modelType.Field(i)
-		if p.Anonymous || !ast.IsExported(p.Name) {
+		if p.Anonymous || !ast.IsExported(p.Name) { // 该field匿名 或者 该field没有导出
 			continue
 		}
 		field := &Field{
