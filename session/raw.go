@@ -39,6 +39,7 @@ func (s *Session) Raw(sql string, values ...interface{}) *Session {
 	return s
 }
 
+// 执行INSERT/UPDATE/DELETE
 func (s *Session) Exec() (sql.Result, error) {
 	defer s.Clear()
 	log.Info(s.sql.String(), s.sqlVars)
@@ -49,16 +50,17 @@ func (s *Session) Exec() (sql.Result, error) {
 	return result, err
 }
 
+// 执行SELECT
 func (s *Session) QueryRow() *sql.Row {
 	defer s.Clear()
 	log.Info(s.sql.String(), s.sqlVars)
-	return s.db.QueryRow(s.sql.String(), s.sqlVars...)
+	return s.db.QueryRow(s.sql.String(), s.sqlVars...) // 返回单个Row对象，延迟到调用Scan()时返回错误，自动关闭底层连接
 }
 
 func (s *Session) QueryRows() (*sql.Rows, error) {
 	defer s.Clear()
 	log.Info(s.sql.String(), s.sqlVars)
-	rows, err := s.DB().Query(s.sql.String(), s.sqlVars...)
+	rows, err := s.db.Query(s.sql.String(), s.sqlVars...) // 返回Rows迭代器，需要手动调用rows.close()
 	if err != nil {
 		log.Error(err)
 	}
