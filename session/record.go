@@ -22,7 +22,7 @@ func (s *Session) Insert(values ...interface{}) (int64, error) {
 }
 
 // reflect包 最佳实践
-// Value和Type的Enum方法
+// Value和Type的Elem方法
 // Value 返回 接口/指针 的原始值， 非接口/指针 或者 为nil 会panic
 // Type 返回 容器类型的元素类型， 非容器类型 会panic
 func (s *Session) Find(values interface{}) error {

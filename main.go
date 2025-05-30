@@ -3,7 +3,7 @@ package main
 import (
 	"gee-orm/log"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3" // init sqlite3 database driver
 )
 
 type Hello struct {

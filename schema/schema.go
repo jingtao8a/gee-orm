@@ -24,7 +24,7 @@ func (s *Schema) GetField(name string) *Field {
 	return s.fieldMap[name]
 }
 
-func (s *Schema) RecordValues(dest interface{}) []interface{} {
+func (s *Schema) RecordValues(dest interface{}) []interface{} { // 将某个struct中的字段按照s.Fields的顺序构造一个参数列表返回
 	destValue := reflect.Indirect(reflect.ValueOf(dest))
 	var fieldValues []interface{}
 	for _, field := range s.Fields {

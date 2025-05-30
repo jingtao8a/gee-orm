@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-type sqlite3 struct{}
-
 func init() { // dialect包被import时，该函数执行
 	RegisterDialect("sqlite3", &sqlite3{})
 }
+
+type sqlite3 struct{}
 
 // 将Go语言的类型转为该数据库的数据类型
 func (s *sqlite3) DataTypeOf(typ reflect.Value) string {
